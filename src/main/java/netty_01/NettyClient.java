@@ -2,6 +2,7 @@ package netty_01;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
@@ -31,14 +32,17 @@ public class NettyClient {
                         @Override
                         protected void initChannel(SocketChannel ch) throws Exception {
                             //自定义处理器
-                            ch.pipeline().addLast(null);
+                            ch.pipeline().addLast(new NettyClientHandler());
                         }
                     });
 
             System.out.println("客户端启动完毕~~");
             ChannelFuture channelFuture = bootstrap.connect("localhost", 8888).sync();
             channelFuture.channel().closeFuture().sync();
+
+
         } finally {
+            //优雅的关闭
             eventExecutors.shutdownGracefully();
         }
     }
