@@ -30,6 +30,5 @@ public class Nio04_BufferGetAndPut {
         System.out.println(allocate.getChar());
         System.out.println(allocate.getShort());
 
-
     }
 }

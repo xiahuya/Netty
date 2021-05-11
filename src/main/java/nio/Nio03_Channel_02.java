@@ -38,7 +38,5 @@ public class Nio03_Channel_02 {
 
         //释放资源
         fileInputStream.close();
-
     }
-
 }

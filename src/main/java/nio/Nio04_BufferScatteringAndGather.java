@@ -43,8 +43,7 @@ public class Nio04_BufferScatteringAndGather {
                 //累计读取字节数
                 byteRead += l;
                 System.out.println("ByteRead=" + byteRead);
-                Arrays.
-                        asList(byteBuffers)
+                Arrays.asList(byteBuffers)
                         .stream()
                         .map(buffer -> "postion=" + buffer.position() + ", limit=" + buffer.limit())
                         .forEach(System.out::println);
