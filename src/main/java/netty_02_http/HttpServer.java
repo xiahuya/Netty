@@ -33,7 +33,7 @@ public class HttpServer {
             //绑定端口
             System.out.println("服务端已经准备好了~~~");
             ChannelFuture future = bootstrap.bind(8888).sync();
-            /*future.addListener(new ChannelFutureListener() {
+            future.addListener(new ChannelFutureListener() {
                 @Override
                 public void operationComplete(ChannelFuture future) throws Exception {
                     if (future.isSuccess()) {
@@ -44,7 +44,7 @@ public class HttpServer {
                     }
 
                 }
-            });*/
+            });
 
             future.channel().closeFuture().sync();
 
