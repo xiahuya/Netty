@@ -13,11 +13,18 @@ import java.nio.channels.SocketChannel;
 public class Nio06_Client {
     //客户端代码
     public static void main(String[] args) throws IOException, InterruptedException {
+        for (int i = 0; i < 100; i++) {
+            new Nio06_Client().connect();
+        }
+
+    }
+
+    public void connect() throws IOException, InterruptedException {
         SocketChannel socketChannel = SocketChannel.open();
         //设置非阻塞模式
         socketChannel.configureBlocking(false);
         //绑定服务端IP,端口
-        SocketAddress socketAddress = new InetSocketAddress("127.0.0.1", 8888);
+        SocketAddress socketAddress = new InetSocketAddress("localhost", 8888);
 
         //连接服务端
         if (!socketChannel.connect(socketAddress)) {
@@ -36,6 +43,5 @@ public class Nio06_Client {
 
         //进程不会被关闭,一直在这里挂起
         System.in.read();
-
     }
 }

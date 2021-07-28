@@ -27,7 +27,16 @@ public class NettyGroupCharClient {
     }
 
     public static void main(String[] args) {
-        new NettyGroupCharClient("localhost", 8888).run();
+        String host = "localhost";
+        int port = 8080;
+        for (int i = 0; i < 1; i++) {
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    new NettyGroupCharClient(host, port).run();
+                }
+            }).start();
+        }
     }
 
     public void run() {
@@ -56,11 +65,12 @@ public class NettyGroupCharClient {
             System.out.println("--------" + channel.localAddress() + "--------");
             //客户端发送的消息从键盘录入
             Scanner scanner = new Scanner(System.in);
-            while (scanner.hasNext()) {
+            /*while (scanner.hasNext()) {
                 String msg = scanner.nextLine();
                 channel.writeAndFlush(msg + "\r\n");
-            }
-
+            }*/
+            String msg = "hello Server ~";
+            channel.writeAndFlush(msg + "\r\n");
             future.channel().closeFuture().sync();
 
         } catch (Exception e) {

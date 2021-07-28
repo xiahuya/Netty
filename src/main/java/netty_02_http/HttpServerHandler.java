@@ -42,7 +42,7 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
 
 
         //对特殊的数据做过滤
-        if (msg instanceof HttpRequest) {
+        /*if (msg instanceof HttpRequest) {
             System.out.println("Msg 类型: " + msg.getClass());
             System.out.println("客户端地址: " + ctx.channel().remoteAddress());
 
@@ -62,6 +62,20 @@ public class HttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
 
             //返回response
             ctx.writeAndFlush(response);
-        }
+        }*/
+
+        System.out.println("aaaa");
+
+        Thread.sleep(10000);
+
+        //回复消息
+        ByteBuf byteBuf = Unpooled.copiedBuffer("客户端你好,我是服务器!", CharsetUtil.UTF_8);
+        //构造与httpRequest 相对应的 HttpResponse
+        DefaultFullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK, byteBuf);
+        response.headers().set(HttpHeaderNames.CONTENT_TYPE, "text/html");
+        response.headers().set(HttpHeaderNames.CONTENT_LENGTH, byteBuf.readableBytes());
+
+        //返回response
+        ctx.writeAndFlush(response);
     }
 }

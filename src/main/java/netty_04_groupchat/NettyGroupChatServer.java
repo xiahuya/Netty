@@ -27,7 +27,7 @@ public class NettyGroupChatServer {
 
     public void run() {
         EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-        EventLoopGroup workGroup = new NioEventLoopGroup();
+        EventLoopGroup workGroup = new NioEventLoopGroup(100);
 
         try {
 

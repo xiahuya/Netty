@@ -6,6 +6,8 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.CharsetUtil;
 
+import java.io.StringReader;
+
 /**
  * @author Xiahu
  * @create 2020/12/29
@@ -21,7 +23,7 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        System.out.println("client ctx = " + ctx);
+        System.out.println(String.format("%s 客户端启动~", ctx.channel().remoteAddress()));
         ctx.writeAndFlush(Unpooled.copiedBuffer("hello,I am Client", CharsetUtil.UTF_8));
     }
 
@@ -34,8 +36,8 @@ public class NettyClientHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        ByteBuf byteBuf = (ByteBuf) msg;
-        System.out.println("服务器回复消息: " + byteBuf.toString(CharsetUtil.UTF_8));
+        System.out.println("服务器回复消息: " + (String) msg);
+        ctx.close();
     }
 
     @Override

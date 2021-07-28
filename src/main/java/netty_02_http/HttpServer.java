@@ -19,7 +19,7 @@ public class HttpServer {
     //基于netty 开发http服务
 
     public static void main(String[] args) {
-        EventLoopGroup bossGroup = new NioEventLoopGroup(1);
+        EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workGroup = new NioEventLoopGroup();
 
         try {
